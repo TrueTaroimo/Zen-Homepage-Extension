@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Tab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Space+Mono&family=Orbitron:wght@200;300;400&family=Playfair+Display:wght@300;400&family=Bebas+Neue&family=DM+Sans:wght@200;300;400&family=JetBrains+Mono:wght@200;300;400&family=Raleway:wght@200;300;400&family=Josefin+Sans:wght@200;300;400&family=Cinzel:wght@400&family=Exo+2:wght@200;300;400&family=Rajdhani:wght@300;400&family=Share+Tech+Mono&family=Audiowide&family=Poiret+One&family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<img id="wp-img" alt="">
+<div id="overlay"></div>
+
+<div id="stage">
+  <div id="glass">
+    <span id="clock">00:00</span>
+  </div>
+</div>
+
+<button id="paint-btn" title="Settings">
+  <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+</button>
+
+<div id="panel">
+  <div class="stitle">Clock</div>
+  <div class="row">
+    <span class="lbl">Font</span>
+    <select class="ctrl" id="sel-font">
+      <optgroup label="── Sans Serif ──">
+        <option value="'Inter',sans-serif">Inter</option>
+        <option value="'DM Sans',sans-serif">DM Sans</option>
+        <option value="'Montserrat',sans-serif">Montserrat</option>
+        <option value="'Raleway',sans-serif">Raleway</option>
+        <option value="'Josefin Sans',sans-serif">Josefin Sans</option>
+        <option value="'Exo 2',sans-serif">Exo 2</option>
+        <option value="'Rajdhani',sans-serif">Rajdhani</option>
+        <option value="'Poiret One',sans-serif">Poiret One</option>
+      </optgroup>
+      <optgroup label="── Display / Sci-Fi ──">
+        <option value="'Orbitron',sans-serif">Orbitron</option>
+        <option value="'Audiowide',sans-serif">Audiowide</option>
+        <option value="'Bebas Neue',sans-serif">Bebas Neue</option>
+        <option value="'Cinzel',serif">Cinzel</option>
+      </optgroup>
+      <optgroup label="── Mono ──">
+        <option value="'Space Mono',monospace">Space Mono</option>
+        <option value="'JetBrains Mono',monospace">JetBrains Mono</option>
+        <option value="'Share Tech Mono',monospace">Share Tech Mono</option>
+      </optgroup>
+      <optgroup label="── Serif ──">
+        <option value="'Playfair Display',serif">Playfair Display</option>
+        <option value="'Cormorant Garamond',serif">Cormorant Garamond</option>
+        <option value="'Georgia',serif">Georgia</option>
+      </optgroup>
+      <optgroup label="── System ──">
+        <option value="system-ui,sans-serif">System UI</option>
+        <option value="'Ubuntu',sans-serif">Ubuntu</option>
+        <option value="'Cantarell',sans-serif">Cantarell</option>
+        <option value="'Noto Sans',sans-serif">Noto Sans</option>
+        <option value="'Courier New',monospace">Courier New</option>
+        <option value="'Impact',sans-serif">Impact</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="row">
+    <span class="lbl">Size</span>
+    <input type="range" class="ctrl" id="sel-size" min="36" max="160" value="96" step="2">
+  </div>
+  <div class="row">
+    <span class="lbl">Color</span>
+    <input type="color" class="ctrl" id="sel-color" value="#ffffff">
+  </div>
+  <div class="sep"></div>
+  <div class="stitle">Background</div>
+  <div class="row">
+    <span class="lbl">Show</span>
+    <label class="toggle">
+      <input type="checkbox" id="sel-bg-show" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="row" id="row-opacity">
+    <span class="lbl">Opacity</span>
+    <input type="range" class="ctrl" id="sel-opacity" min="0" max="100" value="20" step="1">
+  </div>
+  <div class="sep"></div>
+  <div class="stitle">Wallpaper</div>
+  <button class="wp-btn" id="wp-btn">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    Choose image / GIF
+  </button>
+  <div id="wp-label">PNG · JPG · GIF · AVIF · WEBP</div>
+</div>
+
+<input type="file" id="file-input" accept="image/*,.gif,.avif,.webp">
+<script src="app.js"></script>
+</body>
+</html>

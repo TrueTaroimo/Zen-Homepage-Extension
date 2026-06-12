@@ -1,0 +1,125 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { width: 100%; height: 100%; }
+body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; position: relative; }
+
+#wp-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 0; display: none;
+}
+#overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.18);
+  z-index: 1; pointer-events: none;
+}
+
+/* ── Clock */
+#stage {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+#glass {
+  padding: 28px 56px; border-radius: 32px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  transition: background 0.2s, opacity 0.2s, border-color 0.2s, box-shadow 0.2s, backdrop-filter 0.2s;
+}
+#glass.no-bg {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+#clock {
+  font-family: 'Inter', sans-serif;
+  font-size: 96px; font-weight: 200; color: #fff;
+  letter-spacing: 8px; line-height: 1;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap; user-select: none;
+  transition: font-size 0.2s, color 0.2s, font-family 0.15s, letter-spacing 0.15s;
+}
+
+/* ── Paint button */
+#paint-btn {
+  position: absolute; bottom: 22px; right: 22px; z-index: 10;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.22);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.15s;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+#paint-btn:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+#paint-btn svg { width: 19px; height: 19px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── Panel liquid glass */
+#panel {
+  position: absolute; bottom: 72px; right: 22px; z-index: 10;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 22px; padding: 18px; width: 252px;
+  display: flex; flex-direction: column; gap: 11px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+  backdrop-filter: blur(28px) saturate(1.8) brightness(1.05);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8) brightness(1.05);
+  opacity: 0; transform: translateY(10px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+#panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+
+.stitle { font-size: 10px; color: rgba(255,255,255,0.45); letter-spacing: 1.4px; text-transform: uppercase; font-family: system-ui, sans-serif; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.lbl { font-size: 12px; color: rgba(255,255,255,0.65); font-family: system-ui, sans-serif; white-space: nowrap; }
+
+.ctrl {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; color: #fff; font-size: 12px;
+  padding: 5px 8px; width: 140px; outline: none; cursor: pointer;
+  font-family: system-ui, sans-serif; transition: border-color 0.15s, background 0.15s;
+}
+.ctrl:focus { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.15); }
+select.ctrl option { background: #1c1c1e; color: #fff; }
+input[type="range"].ctrl { padding: 0; height: 24px; background: transparent; border: none; width: 140px; cursor: pointer; accent-color: rgba(255,255,255,0.8); }
+input[type="color"].ctrl { padding: 2px; height: 30px; width: 46px; cursor: pointer; border-radius: 6px; }
+
+.sep { height: 1px; background: rgba(255,255,255,0.1); }
+
+/* ── Toggle switch */
+.toggle { position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; inset: 0; cursor: pointer;
+  background: rgba(255,255,255,0.15); border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: background 0.2s;
+}
+.slider::before {
+  content: ''; position: absolute;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #fff; left: 2px; top: 2px;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.toggle input:checked + .slider { background: rgba(255,255,255,0.35); }
+.toggle input:checked + .slider::before { transform: translateX(18px); }
+
+/* ── Wallpaper button */
+.wp-btn {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px; color: #fff; font-size: 12px; padding: 8px 12px;
+  cursor: pointer; font-family: system-ui, sans-serif;
+  transition: background 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.wp-btn:hover { background: rgba(255,255,255,0.2); }
+.wp-btn svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#wp-label { font-size: 11px; color: rgba(255,255,255,0.38); text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: system-ui, sans-serif; }
+#file-input { display: none; }
