@@ -19,7 +19,7 @@ A clean, minimal new tab page built around a liquid glass clock.
 ## Installation
 
 ### From AMO (recommended)
-Install directly from [addons.mozilla.org](https://addons.mozilla.org/firefox/addon/zen-homepage/)
+Install directly from 
 
 ### Manual
 1. Download the latest `.xpi` from [Releases](../../releases)
@@ -28,8 +28,8 @@ Install directly from [addons.mozilla.org](https://addons.mozilla.org/firefox/ad
 ## Development
 
 ```
-git clone https://github.com/taroimo/zen-homepage
-cd zen-homepage
+git clone https://github.com/truetaroimo/zen-homepage-extension
+cd zen-homepage-extension
 ```
 
 No build step needed — pure HTML, CSS, and JS.
